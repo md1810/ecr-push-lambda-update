@@ -2,7 +2,8 @@ name: Deploy to production
 
 on:
   push:
-    branches: [ master ]
+    branches:
+       - main
 
 jobs:
 
@@ -31,6 +32,5 @@ jobs:
         ECR_REPOSITORY: pd-prediction
         IMAGE_TAG: ${{ github.sha }}
       run: 
-        cd do_it
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
