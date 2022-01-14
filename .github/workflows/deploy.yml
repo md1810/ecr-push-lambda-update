@@ -1,4 +1,3 @@
---
 name: Build and Push Image to AWS ECR
 on:
   push:
