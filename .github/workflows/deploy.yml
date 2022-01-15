@@ -32,6 +32,19 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
+      
+      #check
+    - name: Delete Untagged Image to Amazon ECR
+      id: delete-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: pd-prediction
+        IMAGE_TAG: (docker images -q --filter "dangling=true")
+      run: |
+        docker rmi $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      
+      
+        
     - name: Update Lambda function with latest ECR image
       env:
           LAMBDA_NAME: lambdGitauto
