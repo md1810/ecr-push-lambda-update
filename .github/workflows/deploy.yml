@@ -48,13 +48,13 @@ jobs:
         
       
       #delete
-    - name: Delete Untagged Image to Amazon ECR
-      id: delete-image
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: pd-prediction
-        IMAGE_TAG: -f dangling=true
-        #docker rmi $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      run: |
-        docker images $ECR_REGISTRY/$ECR_REPOSITORY:IMAGE_TAG
-        docker image prune --yes
+#     - name: Delete Untagged Image to Amazon ECR
+#       id: delete-image
+#       env:
+#         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#         ECR_REPOSITORY: pd-prediction
+#         IMAGE_TAG: -f dangling=true
+#         #docker rmi $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+#       run: |
+#         docker images $ECR_REGISTRY/$ECR_REPOSITORY:IMAGE_TAG
+#         docker image prune --yes
